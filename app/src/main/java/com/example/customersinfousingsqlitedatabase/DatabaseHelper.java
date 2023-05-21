@@ -61,16 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_ID+" =?",new String[]{String.valueOf(id)});
         while (cursor.moveToNext()){
             CustomerModel model = new CustomerModel();
-            int id_index = cursor.getColumnIndex(KEY_ID);
-            int name_index = cursor.getColumnIndex(KEY_NAME);
-            int mobile_index = cursor.getColumnIndex(KEY_MOBILE);
-            int address_index = cursor.getColumnIndex(KEY_ADDRESS);
-            int pin_index =cursor.getColumnIndex(KEY_PIN_CODE);
-            model.id = cursor.getInt(id_index);
-            model.name = cursor.getString(name_index);
-            model.mobile_no = cursor.getString(mobile_index);
-            model.address = cursor.getString(address_index);
-            model.pin_code = cursor.getInt(pin_index);
+            model.id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID));
+            model.name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NAME));
+            model.mobile_no = cursor.getString(cursor.getColumnIndexOrThrow(KEY_MOBILE));
+            model.address = cursor.getString(cursor.getColumnIndexOrThrow(KEY_ADDRESS));
+            model.pin_code = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_PIN_CODE));
 
             list.add(model);
         }
